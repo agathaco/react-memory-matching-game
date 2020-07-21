@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Rowdies&display=swap');
 *,
 *:after,
 *:before {
@@ -19,12 +19,40 @@ body {
   font-family: 'Open Sans', sans-serif;
   text-align: center;
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  overflow: scroll;
 }
 
-.container {
-  max-width:800px;
+.wrapper {
+  max-width:680px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  font-family: 'Rowdies', sans-serif;
+  font-size: 1.5rem;
+}
+
+.move-count {
+  color: #8b6af5;
+}
+
+button {
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border: 0;
+  background-color: #8b6af5;
+  font-family: 'Rowdies', sans-serif;
+  font-size: 1.2rem;
 }
 
 .card-wrapper {
@@ -64,7 +92,7 @@ body {
 
 .card-back {
   background: white;
-  transform: rotateY( 180deg );
+  transform: rotateY(180deg);
 }
 
 .is-flipped {
@@ -79,4 +107,49 @@ body {
 .is-matched {
   animation: scale 0.45s cubic-bezier(.86, 0, .07, 1) both;
   animation-delay: 1s;
+}
+
+// dots
+$colors:#8b6af5,#74c2f9,#42dfbc,#f9dd5b,#feac5e,#ff5d9e,#f29ff5,#c154d8;
+
+.dots {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 100%;
+  overflow: hidden;
+  & > * {
+    border-radius: 50px;
+    position: absolute;
+  }
+  @for $i from 1 through (80) {
+    $top: random(150)+px;
+    $left: random(150)+px;
+    $size: random(4)+2px;
+    .dot:nth-of-type(#{$i}) {
+      top: $top;
+      left: $left;
+      width: $size;
+      height: $size;
+      background-color:nth($colors, random(length($colors)));
+    }
+  }
+}
+
+.card-back {
+  // background-image: 
+  // radial-gradient(#8b6af5 6%, transparent 0%),
+  // radial-gradient(#7bdff2 6%, transparent 0%),
+  // radial-gradient(#42dfbc 6%, transparent 0%),
+  // radial-gradient(#f9dd5b 6%, transparent 0%),
+  // radial-gradient(#feac5e 6%, transparent 0%),
+  // radial-gradient(#ff5d9e 6%, transparent 0%),
+  // radial-gradient(#f29ff5 6%, transparent 0%),
+  // radial-gradient(#c154d8 6%, transparent 0%),
+  // radial-gradient(#00bbf9 6%, transparent 0%);
+  // background-color: white;
+  // background-position: 0 0px, 30px 0px, 60px 0px, 0px 30px, 0px 60px, 60px 30px, 60px 60px, 30px 60px, 30px 30px;
+  // background-size: 90px 90px;
 }

@@ -1,15 +1,8 @@
 //TO DO
 //1. Add levels?
 //2. Add animation and message when winning
-//3. Add replay button
 //4. Add timer ?
 //5. Replace colors with illustrations
-//6. Improve UI and design
-
-
-
-
-
 
 import React, { Component } from "react";
 import Card from './components/Card';
@@ -49,7 +42,8 @@ class App extends Component {
   }
 
   clearBoard = () => {
-    this.setState({ cards: [], flippedCards: [], matchedCards: [], isClickDisabled: false })
+    console.log('new Game')
+    this.setState({ cards: [], flippedCards: [], matchedCards: [], isClickDisabled: false, moveCount: 0 })
     this.createBoard();
   }
 
@@ -111,13 +105,18 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-      <div>Moves: {this.state.moveCount}</div>
-        {this.state.cards.map((card, index) => {
-          return (
-            <Card card={card} key={index} onCardClick={this.handleCardClick}/>
-          );
-        })}
+      <div className="wrapper">
+        <div className="header">
+          <div className="move-count">Moves: {this.state.moveCount}</div>
+          <button className="new-game" onClick={this.clearBoard}>New Game</button>
+        </div>
+        <div className="container">
+          {this.state.cards.map((card, index) => {
+            return (
+              <Card card={card} key={index} onCardClick={this.handleCardClick}/>
+            );
+          })}
+        </div>
       </div>
     );
   }
