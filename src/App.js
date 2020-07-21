@@ -1,13 +1,13 @@
-
 //TO DO
-//1. Build grid with cards (use flex box and css)
-//2. Have an array of colors (for now)
-//3. Build card array with color, index (two of each)
-//4. Make them hidden/visible status (add flip animaion later)
+//1. Add levels?
+//2. Add animation and message when winning
+//3. Add replay button
+//4. Add timer ?
+//5. Replace colors with illustrations
+//6. Improve UI and design
 
-//5. store clicked card in clickedcardsArray. limit to two els
-//6. when clickedcards has two el, compare them. if cards have same index/color, leave them visible, make them non clickable. else hide them again. have a matched variable
-//7. if cards are match, check for win. user win when all cards have been matched
+
+
 
 
 
@@ -75,53 +75,33 @@ class App extends Component {
           this.setState({ isClickDisabled: true }, () => this.checkForMatch(flippedCards))
         }
       })
-
-    } else {
-      // disabling card flips while checking
-      console.log('nothing')
-      console.log('is click disabled', this.state.isClickDisabled)
     }
-
-
-    // push card to flippedCards array
   }
 
   checkForMatch = (flippedCards) => {
-    console.log('checking for match')
-    console.log(this.state)
     if (flippedCards[0].color === flippedCards[1].color) {
       let matchedCards = [];
       flippedCards.forEach(card => card.isMatched = true)
       matchedCards = flippedCards.concat(this.state.matchedCards)
-      console.log('matched cards', matchedCards)
 
       // set isMatched to true for matched cards
-      this.setState({})
       this.setState({ flippedCards: [], matchedCards, isClickDisabled: false }, () => {
         this.checkForWin()
       })
     } else {
-      console.log('no match', flippedCards[0].color, flippedCards[1].color)
       setTimeout(() => {
         this.setState({ flippedCards: [] , isClickDisabled: false}, () => this.hideAllCards())
       }, 2000)
-
     }
-    // this.setState({ flippedCards: [] })
-
   }
 
   hideAllCards = () => {
-    console.log('hiding all cards')
     const cards = [...this.state.cards]
     cards.map(card => !card.isMatched ? card.isVisible = false : card.isVisible = true)
     this.setState({cards})
   }
 
   checkForWin = () => {
-    console.log('checking for Win')
-    console.log(this.state.matchedCards.length, this.state.cards.length)
-
     if (this.state.matchedCards.length === this.state.cards.length) {
       //all cards have been matched, game is won
       console.log('won')
@@ -138,8 +118,6 @@ class App extends Component {
             <Card card={card} key={index} onCardClick={this.handleCardClick}/>
           );
         })}
-
-
       </div>
     );
   }

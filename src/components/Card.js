@@ -5,12 +5,12 @@ class Card extends Component {
   }
 
   render() {
-    const cardColor = this.props.card.isVisible ? this.props.card.color : '#fff'
-    const cardStyle = {
-      backgroundColor: cardColor
-    }
     return (
-      <div className="card" style={cardStyle} onClick={()=> this.props.onCardClick(this.props.card)}>
+      <div className="card-wrapper"  onClick={()=> this.props.onCardClick(this.props.card)}>
+        <div className={`card-container ${this.props.card.isVisible ? "" : "is-flipped"}`}>
+          <div className={`card card-front ${this.props.card.isMatched ? "is-matched" : ""}`} style={{backgroundColor: this.props.card.color}}></div>
+          <div className="card card-back"></div>
+        </div>
       </div>
     );
   }
