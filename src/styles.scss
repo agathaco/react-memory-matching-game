@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  background: #F5F3F4;
+  background: #F4F7FD;
   margin: 0;
   padding: 10px;
   font-family: 'Open Sans', sans-serif;
@@ -79,6 +79,7 @@ button {
   cursor: pointer;
   user-select: none; 
   position: absolute;
+  padding: 10px;
   width: 100%;
   height: 100%;
   text-align: center;
@@ -88,6 +89,10 @@ button {
   backface-visibility: hidden;
   border-radius: 10px;
   box-shadow: 5px 5px 10px 0 rgba(90, 116, 148, 0.3);
+  svg {
+    width: 100%;
+    height:100%;
+  }
 }
 
 .card-back {
@@ -111,6 +116,7 @@ button {
 
 // dots
 $colors:#8b6af5,#74c2f9,#42dfbc,#f9dd5b,#feac5e,#ff5d9e,#f29ff5,#c154d8;
+$pastels:#cdcdff, #e7ccff, #fdccfb, #ffcbe7, #fdcdcb, #ffe7cd, #feffce, #e8fecd, #cefece, #cbffe8, #ccfffc, #cde7fe;
 
 .dots {
   position: absolute;
@@ -133,7 +139,7 @@ $colors:#8b6af5,#74c2f9,#42dfbc,#f9dd5b,#feac5e,#ff5d9e,#f29ff5,#c154d8;
       left: $left;
       width: $size;
       height: $size;
-      background-color:nth($colors, random(length($colors)));
+      background-color:nth($pastels, random(length($pastels)));
     }
   }
 }

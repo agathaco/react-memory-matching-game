@@ -1,8 +1,7 @@
 //TO DO
-//1. Add levels?
-//2. Add animation and message when winning
-//4. Add timer ?
-//5. Replace colors with illustrations
+//1. Add animation and message when winning
+//2. Add timer ?
+//3. Flip cards before revealing images when starting new game
 
 import React, { Component } from "react";
 import Card from './components/Card';
@@ -18,7 +17,8 @@ class App extends Component {
       matchedCards: [],
       moveCount: 0,
       isClickDisabled: false,
-      colors: ["#8b6af5","#74c2f9","#42dfbc","#f9dd5b","#feac5e","#ff5d9e","#f29ff5","#c154d8"]
+      colors: ["#8b6af5","#74c2f9","#42dfbc","#f9dd5b","#feac5e","#ff5d9e","#f29ff5","#c154d8"],
+      images:["Hearts", "Star", "Mushrooms", "Unicorn", "Icecream", "Donut", "Rainbow", "Balloons"]
     }
   }
 
@@ -28,13 +28,13 @@ class App extends Component {
 
   createBoard = () => {
     const cards = [];
-    const cardColors = this.state.colors.concat(this.state.colors).sort(() => Math.random() - 0.5)
-    for (let i=1; i <= cardColors.length; i++) {
+    const cardImages = this.state.images.concat(this.state.images).sort(() => Math.random() - 0.5)
+    for (let i=1; i <= cardImages.length; i++) {
       const card = {
         id: i,
         isVisible: false,
         isMatched: false,
-        color: cardColors[i-1]
+        image: cardImages[i-1]
       }
       cards.push(card)
     }
@@ -73,7 +73,7 @@ class App extends Component {
   }
 
   checkForMatch = (flippedCards) => {
-    if (flippedCards[0].color === flippedCards[1].color) {
+    if (flippedCards[0].image === flippedCards[1].image) {
       let matchedCards = [];
       flippedCards.forEach(card => card.isMatched = true)
       matchedCards = flippedCards.concat(this.state.matchedCards)
