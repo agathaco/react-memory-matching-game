@@ -1,10 +1,10 @@
 //TO DO
-//1. Add animation and message when winning
-//2. Add timer ?
 //3. Flip cards before revealing images when starting new game
+//4. add shuffle animation
 
 import React, { Component } from "react";
 import Card from './components/Card';
+import Modal from "./components/Modal";
 
 import './styles.scss';
 
@@ -17,6 +17,7 @@ class App extends Component {
       matchedCards: [],
       moveCount: 0,
       isClickDisabled: false,
+      isModalOpen: false,
       colors: ["#8b6af5","#74c2f9","#42dfbc","#f9dd5b","#feac5e","#ff5d9e","#f29ff5","#c154d8"],
       images:["Hearts", "Star", "Mushrooms", "Unicorn", "Icecream", "Donut", "Rainbow", "Balloons"]
     }
@@ -39,16 +40,17 @@ class App extends Component {
       cards.push(card)
     }
     this.setState({ cards })
+    // console.log(cards)
   }
 
   clearBoard = () => {
-    console.log('new Game')
-    this.setState({ cards: [], flippedCards: [], matchedCards: [], isClickDisabled: false, moveCount: 0 })
-    this.createBoard();
+    this.setState({ cards: [], flippedCards: [], matchedCards: [], isClickDisabled: false, moveCount: 0 }, () => this.createBoard())
   }
 
   replay = () => {
-
+    console.log('replay')
+    if (this.state.isModalOpen) this.setState({isModalOpen: false})
+    this.clearBoard();
   }
 
   handleCardClick = (clickedCard) => {
@@ -97,8 +99,10 @@ class App extends Component {
 
   checkForWin = () => {
     if (this.state.matchedCards.length === this.state.cards.length) {
-      //all cards have been matched, game is won
       console.log('won')
+      setTimeout(() => {
+      this.setState({isModalOpen: true})
+      }, 2000)
     }
 
   }
@@ -106,9 +110,10 @@ class App extends Component {
   render() {
     return (
       <div className="wrapper">
+      <Modal moveCount={this.state.moveCount} show={this.state.isModalOpen} onReplay={this.replay} />
         <div className="header">
           <div className="move-count">Moves: {this.state.moveCount}</div>
-          <button className="new-game" onClick={this.clearBoard}>New Game</button>
+          <button className="new-game" onClick={this.replay}>New Game</button>
         </div>
         <div className="container">
           {this.state.cards.map((card, index) => {

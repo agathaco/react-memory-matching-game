@@ -16,7 +16,7 @@ body {
   background: #F4F7FD;
   margin: 0;
   padding: 10px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Verdana', sans-serif;
   text-align: center;
   display: flex;
   flex-wrap: wrap;
@@ -32,7 +32,7 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 10px 20px 0;
   font-family: 'Rowdies', sans-serif;
   font-size: 1.5rem;
 }
@@ -45,14 +45,13 @@ button {
   cursor: pointer;
   padding: 0.5rem;
   color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
+  border-radius: 8px;
   border: 0;
   background-color: #8b6af5;
   font-family: 'Rowdies', sans-serif;
   font-size: 1.2rem;
+  box-shadow: 5px 5px 10px 0 rgba(90, 116, 148, 0.3);
+  margin-bottom: 1rem
 }
 
 .card-wrapper {
@@ -85,6 +84,7 @@ button {
   text-align: center;
   font-weight: bold;
   font-size: 40px;
+  overflow:hidden;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: 10px;
@@ -97,16 +97,17 @@ button {
 
 .card-back {
   background: white;
+  position:absolute;
+  z-index: 1;
+}
+
+.card-front {
   transform: rotateY(180deg);
+
 }
 
 .is-flipped {
   transform: rotateY(180deg);
-}
-
-@keyframes scale {
-  0%, 100%   {transform: scale(1);}
-  50% {transform: scale(1.1);}
 }
 
 .is-matched {
@@ -114,12 +115,25 @@ button {
   animation-delay: 1s;
 }
 
-// dots
-$colors:#8b6af5,#74c2f9,#42dfbc,#f9dd5b,#feac5e,#ff5d9e,#f29ff5,#c154d8;
+// .card-back {
+  // background-image: 
+  // radial-gradient(#8b6af5 6%, transparent 0%),
+  // radial-gradient(#7bdff2 6%, transparent 0%),
+  // radial-gradient(#42dfbc 6%, transparent 0%),
+  // radial-gradient(#f9dd5b 6%, transparent 0%),
+  // radial-gradient(#feac5e 6%, transparent 0%),
+  // radial-gradient(#ff5d9e 6%, transparent 0%),
+  // radial-gradient(#f29ff5 6%, transparent 0%),
+  // radial-gradient(#c154d8 6%, transparent 0%),
+  // radial-gradient(#00bbf9 6%, transparent 0%);
+  // background-color: white;
+  // background-position: 0 0px, 30px 0px, 60px 0px, 0px 30px, 0px 60px, 60px 30px, 60px 60px, 30px 60px, 30px 30px;
+  // background-size: 90px 90px;
+// }
+
 $pastels:#cdcdff, #e7ccff, #fdccfb, #ffcbe7, #fdcdcb, #ffe7cd, #feffce, #e8fecd, #cefece, #cbffe8, #ccfffc, #cde7fe;
 
 .dots {
-  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -144,18 +158,56 @@ $pastels:#cdcdff, #e7ccff, #fdccfb, #ffcbe7, #fdcdcb, #ffe7cd, #feffce, #e8fecd,
   }
 }
 
-.card-back {
-  // background-image: 
-  // radial-gradient(#8b6af5 6%, transparent 0%),
-  // radial-gradient(#7bdff2 6%, transparent 0%),
-  // radial-gradient(#42dfbc 6%, transparent 0%),
-  // radial-gradient(#f9dd5b 6%, transparent 0%),
-  // radial-gradient(#feac5e 6%, transparent 0%),
-  // radial-gradient(#ff5d9e 6%, transparent 0%),
-  // radial-gradient(#f29ff5 6%, transparent 0%),
-  // radial-gradient(#c154d8 6%, transparent 0%),
-  // radial-gradient(#00bbf9 6%, transparent 0%);
-  // background-color: white;
-  // background-position: 0 0px, 30px 0px, 60px 0px, 0px 30px, 0px 60px, 60px 30px, 60px 60px, 30px 60px, 30px 30px;
-  // background-size: 90px 90px;
+#modal {
+  position: fixed;
+  background-color: rgba(#39395b, 0.2);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  // transition-delay: 1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    width:80%
+  }
+  button {
+    margin-bottom: 2rem;
+    font-size:1.5rem;
+  }
+  &.show {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  h1 {
+    color: #453D84;
+    margin: 0;
+  }
+  h2 {
+    color: #5E5AAF;
+    font-size: 1.2rem;
+    font-weight: normal;
+    margin-bottom:3rem;
+  }
+}
+
+.modal-box {
+  background-color: #f9f8fe;
+  box-shadow: 5px 5px 20px 0 rgba(#453D84, 0.3);
+  border-radius: 10px;
+  min-width: 500px;
+  text-align: center;
+  padding: 2rem;
+}
+
+@keyframes scale {
+  0%, 100%   {transform: scale(1) rotateY(180deg);}
+  50% {transform: scale(1.1) rotateY(180deg);}
 }

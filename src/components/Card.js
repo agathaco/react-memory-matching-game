@@ -45,7 +45,7 @@ const Card = (props) => {
     )
   }
 
-  const dotNumber = 80
+  const dotNumber = 100
   let dots = [...Array(dotNumber)].map((e, i) => {
     return (
       <div className="dot" key={i}></div>
@@ -54,11 +54,11 @@ const Card = (props) => {
 
   return (
     <div className="card-wrapper"  onClick={() => props.onCardClick(props.card)}>
-      <div className={`card-container ${props.card.isVisible ? "" : "is-flipped"}`}>
+      <div className={`card-container ${props.card.isVisible ? "is-flipped" : ""}`}>
+        <div className="card card-back"><div className="dots">{dots}</div></div>
         <div className={`card card-front ${props.card.isMatched ? "is-matched" : ""}`}>
           {image}
         </div>
-        <div className="card card-back"><div className="dots">{dots}</div></div>
       </div>
     </div>
   );
