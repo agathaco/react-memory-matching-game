@@ -18,7 +18,6 @@ class App extends Component {
       moveCount: 0,
       isClickDisabled: false,
       isModalOpen: false,
-      colors: ["#8b6af5","#74c2f9","#42dfbc","#f9dd5b","#feac5e","#ff5d9e","#f29ff5","#c154d8"],
       images:["Hearts", "Star", "Mushrooms", "Unicorn", "Icecream", "Donut", "Rainbow", "Balloons"]
     }
   }
@@ -35,12 +34,12 @@ class App extends Component {
         id: i,
         isVisible: false,
         isMatched: false,
+        isReset: false,
         image: cardImages[i-1]
       }
       cards.push(card)
     }
     this.setState({ cards })
-    // console.log(cards)
   }
 
   clearBoard = () => {
@@ -48,9 +47,16 @@ class App extends Component {
   }
 
   replay = () => {
-    console.log('replay')
     if (this.state.isModalOpen) this.setState({isModalOpen: false})
-    this.clearBoard();
+    const cards = [...this.state.cards]
+     cards.forEach(card => {
+       card.isVisible = false
+       card.isReset = true
+     })
+    this.setState({cards})
+    setTimeout(() => {
+      this.clearBoard();
+    }, 500)
   }
 
   handleCardClick = (clickedCard) => {
@@ -99,7 +105,6 @@ class App extends Component {
 
   checkForWin = () => {
     if (this.state.matchedCards.length === this.state.cards.length) {
-      console.log('won')
       setTimeout(() => {
       this.setState({isModalOpen: true})
       }, 2000)
@@ -109,18 +114,20 @@ class App extends Component {
 
   render() {
     return (
-      <div className="wrapper">
-      <Modal moveCount={this.state.moveCount} show={this.state.isModalOpen} onReplay={this.replay} />
-        <div className="header">
-          <div className="move-count">Moves: {this.state.moveCount}</div>
-          <button className="new-game" onClick={this.replay}>New Game</button>
-        </div>
-        <div className="container">
-          {this.state.cards.map((card, index) => {
-            return (
-              <Card card={card} key={index} onCardClick={this.handleCardClick}/>
-            );
-          })}
+      <div>
+        <Modal moveCount={this.state.moveCount} show={this.state.isModalOpen} onReplay={this.replay} />
+        <div className="wrapper">
+          <div className="header">
+            <div className="move-count">Moves: {this.state.moveCount}</div>
+            <button className="new-game" onClick={this.replay}>New Game</button>
+          </div>
+          <div className="container">
+            {this.state.cards.map((card, index) => {
+              return (
+                <Card card={card} key={index} onCardClick={this.handleCardClick}/>
+              );
+            })}
+          </div>
         </div>
       </div>
     );

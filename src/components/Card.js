@@ -15,31 +15,31 @@ const Card = (props) => {
     image = (
       <Hearts/>
     )
-  } else  if (cardImage === 'Donut') {
+  } else if (cardImage === 'Donut') {
     image = (
       <Donut/>
     )
-  } else  if (cardImage === 'Icecream') {
+  } else if (cardImage === 'Icecream') {
     image = (
       <Icecream/>
     )
-  } else  if (cardImage === 'Mushrooms') {
+  } else if (cardImage === 'Mushrooms') {
     image = (
       <Mushrooms/>
     )
-  } else  if (cardImage === 'Balloons') {
+  } else if (cardImage === 'Balloons') {
     image = (
       <Balloons/>
     )
-  } else  if (cardImage === 'Rainbow') {
+  } else if (cardImage === 'Rainbow') {
     image = (
       <Rainbow/>
     )
-  } else  if (cardImage === 'Star') {
+  } else if (cardImage === 'Star') {
     image = (
       <Star/>
     )
-  } else  if (cardImage === 'Unicorn') {
+  } else if (cardImage === 'Unicorn') {
     image = (
       <Unicorn/>
     )
@@ -53,7 +53,8 @@ const Card = (props) => {
   })
 
   return (
-    <div className="card-wrapper"  onClick={() => props.onCardClick(props.card)}>
+    
+    <div className={`card-wrapper ${props.card.isReset? "is-reset" : ""}`}  onClick={() => props.onCardClick(props.card)}>
       <div className={`card-container ${props.card.isVisible ? "is-flipped" : ""}`}>
         <div className="card card-back"><div className="dots">{dots}</div></div>
         <div className={`card card-front ${props.card.isMatched ? "is-matched" : ""}`}>

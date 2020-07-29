@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rowdies&display=swap');
+
 *,
 *:after,
 *:before {
@@ -10,6 +11,7 @@ body,
 html {
 	height: 100%;
 	width: 100%;
+  font-size:15px;
 }
 
 body {
@@ -26,7 +28,9 @@ body {
 }
 
 .wrapper {
-  max-width:680px;
+  display: flex;
+  flex-direction: column;
+  max-width: 680px;
 }
 
 .header {
@@ -39,13 +43,14 @@ body {
 
 .move-count {
   color: #8b6af5;
+  line-height:2.5rem;
 }
 
 button {
   cursor: pointer;
   padding: 0.5rem;
   color: #fff;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   border: 0;
   background-color: #8b6af5;
   font-family: 'Rowdies', sans-serif;
@@ -54,13 +59,19 @@ button {
   margin-bottom: 1rem
 }
 
+.container {
+  margin: 0 auto;
+  width: 100%;
+}
+
 .card-wrapper {
   width: 150px;
   height: 150px;
   transform-style: preserve-3d;
   display: inline-block;
-  margin: 10px;
+  margin:  0.5rem;
   perspective: 1000px;
+  transition: all 1s ease;
 }  
 
 .card-container {
@@ -69,7 +80,6 @@ button {
   position: relative;
   transition: transform 1s;
   transform-style: preserve-3d;
-
 }
 
 .card {
@@ -78,16 +88,13 @@ button {
   cursor: pointer;
   user-select: none; 
   position: absolute;
-  padding: 10px;
+  padding: 0.5rem;
   width: 100%;
   height: 100%;
-  text-align: center;
-  font-weight: bold;
-  font-size: 40px;
   overflow:hidden;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   box-shadow: 5px 5px 10px 0 rgba(90, 116, 148, 0.3);
   svg {
     width: 100%;
@@ -103,7 +110,6 @@ button {
 
 .card-front {
   transform: rotateY(180deg);
-
 }
 
 .is-flipped {
@@ -111,25 +117,17 @@ button {
 }
 
 .is-matched {
-  animation: scale 0.45s cubic-bezier(.86, 0, .07, 1) both;
+  animation: scale 0.4s cubic-bezier(.86, 0, .07, 1);
   animation-delay: 1s;
 }
+.is-reset {
+  animation: scaleBack 0.4s cubic-bezier(.86, 0, .07, 1);
+}
 
-// .card-back {
-  // background-image: 
-  // radial-gradient(#8b6af5 6%, transparent 0%),
-  // radial-gradient(#7bdff2 6%, transparent 0%),
-  // radial-gradient(#42dfbc 6%, transparent 0%),
-  // radial-gradient(#f9dd5b 6%, transparent 0%),
-  // radial-gradient(#feac5e 6%, transparent 0%),
-  // radial-gradient(#ff5d9e 6%, transparent 0%),
-  // radial-gradient(#f29ff5 6%, transparent 0%),
-  // radial-gradient(#c154d8 6%, transparent 0%),
-  // radial-gradient(#00bbf9 6%, transparent 0%);
-  // background-color: white;
-  // background-position: 0 0px, 30px 0px, 60px 0px, 0px 30px, 0px 60px, 60px 30px, 60px 60px, 30px 60px, 30px 30px;
-  // background-size: 90px 90px;
-// }
+.is-stacked {
+  margin-bottom: -170px;
+  margin-right: -160px;
+}
 
 $pastels:#cdcdff, #e7ccff, #fdccfb, #ffcbe7, #fdcdcb, #ffe7cd, #feffce, #e8fecd, #cefece, #cbffe8, #ccfffc, #cde7fe;
 
@@ -166,14 +164,12 @@ $pastels:#cdcdff, #e7ccff, #fdccfb, #ffcbe7, #fdcdcb, #ffe7cd, #feffce, #e8fecd,
   bottom: 0;
   left: 0;
   z-index: 999;
-  visibility: hidden;
-  opacity: 0;
   pointer-events: none;
   transition: all 0.3s;
-  // transition-delay: 1s;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
+
   svg {
     width:80%
   }
@@ -182,8 +178,7 @@ $pastels:#cdcdff, #e7ccff, #fdccfb, #ffcbe7, #fdcdcb, #ffe7cd, #feffce, #e8fecd,
     font-size:1.5rem;
   }
   &.show {
-    visibility: visible;
-    opacity: 1;
+    display: flex;
     pointer-events: auto;
   }
   h1 {
@@ -202,12 +197,96 @@ $pastels:#cdcdff, #e7ccff, #fdccfb, #ffcbe7, #fdcdcb, #ffe7cd, #feffce, #e8fecd,
   background-color: #f9f8fe;
   box-shadow: 5px 5px 20px 0 rgba(#453D84, 0.3);
   border-radius: 10px;
-  min-width: 500px;
+  width:80%;
+  max-width: 500px;
   text-align: center;
   padding: 2rem;
+  animation: jitter 2.5s forwards ease-in;
+
 }
 
 @keyframes scale {
   0%, 100%   {transform: scale(1) rotateY(180deg);}
   50% {transform: scale(1.1) rotateY(180deg);}
 }
+
+@keyframes scaleBack {
+  0%, 100%   {transform: scale(1)}
+  50% {transform: scale(1.1)}
+}
+
+
+@keyframes jitter {
+  0% {
+    transform: scale(0)
+  }
+	10%,
+	50% {
+		transform: scale(1);
+	}
+	15% {
+		transform: scale(0.9);
+	}
+	20% {
+		transform: scale(1.1);
+	}
+	25% {
+		transform: scale(1.1) rotate(-4deg);
+	}
+	30% {
+		transform: scale(1.1) rotate(4deg);
+	}
+	35% {
+		transform: scale(1.1) rotate(-3deg);
+	}
+	40% {
+		transform: scale(1.1) rotate(3deg);
+	}
+	45% {
+		transform: scale(1.1) rotate(0);
+	}
+}
+
+
+@media only screen 
+  and (max-device-width: 375px)  {  
+    html {
+      font-size:10px
+    }
+    .card-wrapper {
+      width: 75px;
+      height: 75px;
+    }
+    .dots {
+      @for $i from 1 through (80) {
+        $top: random(75)+px;
+        $left: random(75)+px;
+        $size: random(3)+1px;
+        .dot:nth-of-type(#{$i}) {
+          top: $top;
+          left: $left;
+          width: $size;
+          height: $size;
+        }
+      }
+  }
+}
+
+
+
+// dotted pattern
+// .card-back {
+  // background-image: 
+  // radial-gradient(#8b6af5 6%, transparent 0%),
+  // radial-gradient(#7bdff2 6%, transparent 0%),
+  // radial-gradient(#42dfbc 6%, transparent 0%),
+  // radial-gradient(#f9dd5b 6%, transparent 0%),
+  // radial-gradient(#feac5e 6%, transparent 0%),
+  // radial-gradient(#ff5d9e 6%, transparent 0%),
+  // radial-gradient(#f29ff5 6%, transparent 0%),
+  // radial-gradient(#c154d8 6%, transparent 0%),
+  // radial-gradient(#00bbf9 6%, transparent 0%);
+  // background-color: white;
+  // background-position: 0 0px, 30px 0px, 60px 0px, 0px 30px, 0px 60px, 60px 30px, 60px 60px, 30px 60px, 30px 30px;
+  // background-size: 90px 90px;
+// }
