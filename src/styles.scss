@@ -170,8 +170,12 @@ $pastels:#cdcdff, #e7ccff, #fdccfb, #ffcbe7, #fdcdcb, #ffe7cd, #feffce, #e8fecd,
   align-items: center;
   justify-content: center;
 
+
   svg {
-    width:80%
+    width:80%;
+    position: relative;
+    z-index:99;
+
   }
   button {
     margin-bottom: 2rem;
@@ -192,6 +196,19 @@ $pastels:#cdcdff, #e7ccff, #fdccfb, #ffcbe7, #fdcdcb, #ffe7cd, #feffce, #e8fecd,
     margin-bottom:3rem;
   }
 }
+.svg-box {
+  position: relative;
+}
+.background-blur {
+  position: absolute;
+  top: 30%;
+  left: 20%;
+  width: 60%;
+  height: 40%;
+  border-radius: 50%;
+  background-color: #fdccfb;
+  filter: blur(3rem);
+}
 
 .modal-box {
   background-color: #f9f8fe;
@@ -202,6 +219,7 @@ $pastels:#cdcdff, #e7ccff, #fdccfb, #ffcbe7, #fdcdcb, #ffe7cd, #feffce, #e8fecd,
   text-align: center;
   padding: 2rem;
   animation: jitter 2.5s forwards ease-in;
+
 
 }
 
